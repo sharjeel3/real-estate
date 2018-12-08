@@ -2,11 +2,37 @@ import React, { Component } from 'react'
 import { propertyActionCreator } from '../../actions'
 import { connect } from 'react-redux'
 import PropertyView from '../../components/Property/Property'
+import { CONSTANTS } from '../../global'
 
 class Property extends Component {
     componentDidMount() {
         const { onLoad } = this.props
         onLoad()
+    }
+
+    addSavedProperty(property) {
+        const { onSave } = this.props
+        onSave({
+            [property.id]: {
+                ...property,
+                time: new Date().getTime()
+            }
+        })
+    }
+
+    removeSavedProperty(property) {
+        const { onRemove } = this.props
+        onRemove(property.id)
+    }
+
+    handleClick = (action, property) => event => {
+        event.preventDefault()
+        const isValidAction = action === CONSTANTS.ADD || action === CONSTANTS.REMOVE
+        if (!isValidAction || !property) {
+            return
+        }
+        const handler = action === CONSTANTS.ADD ? this.addSavedProperty : this.removeSavedProperty
+        handler(property)
     }
 
     render() {
