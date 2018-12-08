@@ -1,44 +1,84 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Real Estate UI Exercise
 
-## Available Scripts
+## TL; DR
 
-In the project directory, you can run:
+Run the following commands to start the app:
 
-### `npm start`
+### 1. `npm install` or `yarn`
 
-Runs the app in the development mode.<br>
+This will install dependencies
+
+### 2. `npm start` or `yarn start`
+
+This will run the app in the development mode.<br>
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Tech being used
 
-### `npm test`
+This app is built with:
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+* create-react-app
+* React
+* Redux
+* Thunk
+* axios
+* Jest
+* ES6 goodness
+* SCSS and CSS Modules
 
-### `npm run build`
+## App Design
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The application code is divided into various logical components. You will see different folders in the project directory as mentioned below:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### containers
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Here you can see the business logic of a component. At the moment, it only has Property container. Container is responsible for calling the action creators, handling of user generated events and passing Redux state to stateless components.
 
-### `npm run eject`
+### components
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Here you can see the stateless "dumb" components. Mostly you will see view components of an app here. Currently it has components related to rendering the property results and saved properties.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### actions
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+All the Redux action creators and related tests can be found here. Property action creator uses a fetch helper to request data from network(e.g., REST API). Fetch helper is built with axios.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+### reducers
 
-## Learn More
+All the Redux reducers and related tests are defined here. Currently it has only one reducer to maintain state for property.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Style Guide
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This folder should contain the brand / theme variables and all the reuseable React UI components. Currently it has simple components for Button, Row and Container using Bootstrap to demonstrate the idea.
+
+### global
+
+It contains global constants for the app.
+
+## What have I done... (so far)
+
+I have built the basic functionality as described below:
+
+* Fetch the data from mock API
+* Update Redux state
+* Render views
+* Handle click events to add or remove a saved property from Redux state
+* Redux action creators for state management
+
+Generally speaking, I have created the app architecture in a way to keep it easy to add new features later on.
+
+**Redux** is an important part of application architecture. You will notice that I have kept savedProperty state as an object to keep it easy  to update the state. I am also using timestamp to manage the order of rendering for saved properties.
+
+## What is in progress
+
+I have currently stopped working on it.
+
+## The future
+
+There are a few things I would like to mention. <br>
+I have focused on demonstration of my development skills while writing code for this project rather than trying to build a finished product. Hopefully it will help you understand my thought process. We can chat more during our face to face meeting. With respect to code, here are some notes for future:
+
+* Prop types are added to style guide at the moment. These can be added to rest of the app components.
+* Fetch helper is really basic one. It can be enhanced to support post requests etc.
+* UI is super basic. It can be improved. 
+* Unit testing is covering Redux at the moment. More tests can be added througout the app.
+
