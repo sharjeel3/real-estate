@@ -12,9 +12,16 @@ const helper = (() => {
         return Object.keys(savedProperty).indexOf(id) !== -1
     }
 
+    const getSavedItems = savedProperty => {
+        return Object.keys(savedProperty).map(id => {
+            return savedProperty[id]
+        }).sort((a, b) => (a.time - b.time))
+    }
+
     return {
         getAgencyAssets,
-        getIsSaved
+        getIsSaved,
+        getSavedItems
     }
 })()
 

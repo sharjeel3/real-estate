@@ -36,9 +36,10 @@ class Item extends Component {
         const { image, color } = propertyHelper.getAgencyAssets(agency)
         const { hover } = this.state
         const isSaved = propertyHelper.getIsSaved(id, savedProperty)
-        const actionText = action === CONSTANTS.ADD ? 'Add' : 'Remove'
-        const buttonText = isSaved ? 'Saved...' : `${actionText} Property`
-        const buttonDisabled = isSaved ? true : false
+        const isAddAction = action === CONSTANTS.ADD
+        const actionText = isAddAction ? 'Add' : 'Remove'
+        const buttonText = isSaved && isAddAction ? 'Saved...' : `${actionText} Property`
+        const buttonDisabled = isSaved === true && isAddAction
         const handleClick = typeof onClick === 'function' ? onClick(action, item) : null
 
         return (

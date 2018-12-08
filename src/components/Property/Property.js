@@ -5,6 +5,7 @@ import Container from '../../style-guide/react/Container/Container'
 import Row from '../../style-guide/react/Row/Row'
 import List from './List/List'
 import { CONSTANTS } from '../../global'
+import SavedProperty from './SavedProperty/SavedProperty'
 
 const Property = ({ ...props }) => {
     const { isFetching, response, onClick, savedProperty } = props
@@ -31,7 +32,11 @@ const Property = ({ ...props }) => {
                         />
                     </div>
                     <div className="col-lg">
-                        Saved Properties
+                        <SavedProperty
+                            action={CONSTANTS.REMOVE}
+                            savedProperty={savedProperty}
+                            onClick={onClick}
+                        />
                     </div>
                 </Row>
             </Container>
