@@ -3,9 +3,8 @@ import Card from '../../../style-guide/react/Card/Card'
 import ImageBlock from '../../../style-guide/react/ImageBlock/ImageBlock'
 import propertyHelper from '../helper/helper'
 import styles from './Item.module.scss'
-import Button from '../../../style-guide/react/Button/Button'
 import classnames from 'classnames'
-import { CONSTANTS } from '../../../global'
+import ActionButton from './ActionButton/ActionButton'
 
 class Item extends Component {
     constructor(props) {
@@ -27,20 +26,14 @@ class Item extends Component {
     }
 
     render() {
-        const { item, onClick, savedProperty, action } = this.props
+        const { item, action } = this.props
         if (!item) {
             return ''
         }
 
-        const { price, mainImage, agency, id } = item
+        const { price, mainImage, agency } = item
         const { image, color } = propertyHelper.getAgencyAssets(agency)
         const { hover } = this.state
-        const isSaved = propertyHelper.getIsSaved(id, savedProperty)
-        const isAddAction = action === CONSTANTS.ADD
-        const actionText = isAddAction ? 'Add' : 'Remove'
-        const buttonText = isSaved && isAddAction ? 'Saved...' : `${actionText} Property`
-        const buttonDisabled = isSaved === true && isAddAction
-        const handleClick = typeof onClick === 'function' ? onClick(action, item) : null
 
         return (
             <Card
@@ -57,9 +50,7 @@ class Item extends Component {
                 <div className={classnames(styles.overlay, {
                     [styles.overlay_isVisible]: hover === true && action
                 })}>
-                    <Button disabled={buttonDisabled} onClick={handleClick}>
-                        {buttonText}
-                    </Button>
+                    <ActionButton {...this.props} />
                 </div>
             </Card>
         )
