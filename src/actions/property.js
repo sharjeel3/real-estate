@@ -13,8 +13,38 @@ const refreshIsFetching = isFetching => ({
     isFetching
 })
 
+const refreshSavedProperty = payload => ({
+    type: CONSTANTS.REFRESH_SAVED_PROPERTY,
+    payload
+})
+
+const addSavedProperty = payload => {
+    return refreshSavedProperty(payload)
+}
+
+const removeSavedProperty = id => ({
+    type: CONSTANTS.REMOVE_SAVED_PROPERTY,
+    id
+})
+
+const updateSavedPropertyContent = response => {
+    const { saved = [] } = response || {}
+    if (!saved || saved.length === 0) {
+        return
+    }
+    const payload = Object.assign({}, ...saved.map(item => {
+        return {
+            [item.id]: { ...item }
+        }
+    }))
+    return refreshSavedProperty(payload)
+}
+
 const fetchPropertyCb = dispatch => (error, response) => {
     const success = error === null
+    if (success) {
+        dispatch(updateSavedPropertyContent(response))
+    }
     return refreshProperty(success ? '' : 'Something went wrong', response)
 }
 
@@ -31,5 +61,8 @@ const requestProperty = props => dispatch => {
 export default {
     requestProperty,
     refreshIsFetching,
-    refreshProperty
+    refreshProperty,
+    refreshSavedProperty,
+    addSavedProperty,
+    removeSavedProperty
 }

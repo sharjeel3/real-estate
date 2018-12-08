@@ -1,9 +1,9 @@
 import { CONSTANTS } from '../global'
 
-const defaultState = {
+export const defaultState = {
     error: '',
     response: null,
-    savedContent: '',
+    savedProperty: {},
     isFetching: false
 }
 
@@ -13,6 +13,23 @@ const property = (state = defaultState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+        case CONSTANTS.REFRESH_SAVED_PROPERTY:
+            return {
+                ...state,
+                savedProperty: {
+                    ...state.savedProperty,
+                    ...action.payload
+                }
+            }
+        case CONSTANTS.REMOVE_SAVED_PROPERTY:
+            const key = `${action.id}`
+            const { [key]: discard, ...restSavedProperty } = state.savedProperty
+            return {
+                ...state,
+                savedProperty: {
+                    ...restSavedProperty
+                }
             }
         case CONSTANTS.REFRESH_PROPERTY:
             return {

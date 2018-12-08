@@ -1,6 +1,6 @@
 import { CONSTANTS } from '../../global'
-import propertyReducer from '../property'
-import { propertyActionCreator } from '../../actions';
+import propertyReducer, { defaultState } from '../property'
+import { propertyActionCreator } from '../../actions'
 
 describe('>>> REDUCER TEST - PROPERTY STATE ', () => {
     test('+++ REFRESH_IS_FETCHING', () => {
@@ -9,6 +9,33 @@ describe('>>> REDUCER TEST - PROPERTY STATE ', () => {
         const state = propertyReducer(null, action)
         expect(state).toEqual({
             isFetching
+        })
+    })
+
+    test('+++ REFRESH_SAVED_PROPERTY', () => {
+        const savedProperty = { 115: { id: 115 }}
+        const action = propertyActionCreator.refreshSavedProperty(savedProperty)
+        const state = propertyReducer(defaultState, action)
+        expect(state).toEqual({
+            ...defaultState,
+            savedProperty
+        })
+    })
+
+    test('+++ REMOVE_SAVED_PROPERTY', () => {
+        const id = 554
+        const savedProperty = { [id]: { id }}
+        const saveAction = propertyActionCreator.refreshSavedProperty(savedProperty)
+        const saveState = propertyReducer(defaultState, saveAction)
+        expect(saveState).toEqual({
+            ...defaultState,
+            savedProperty
+        })
+
+        const removeAction = propertyActionCreator.removeSavedProperty(id)
+        const removeState = propertyReducer(defaultState, removeAction)
+        expect(removeState).toEqual({
+            ...defaultState
         })
     })
 
