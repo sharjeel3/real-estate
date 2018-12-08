@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Row.module.scss'
 import classnames from 'classnames'
+import PropTypes from 'prop-types'
 
 const Row = ({ ...props }) => {
     const { className, children } = props
@@ -12,6 +13,11 @@ const Row = ({ ...props }) => {
             {children}
         </div>
     )
+}
+
+Row.propTypes = {
+    className: PropTypes.string,
+    children: PropTypes.node.isRequired
 }
 
 export default Row
