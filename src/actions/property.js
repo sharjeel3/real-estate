@@ -34,7 +34,7 @@ const updateSavedPropertyContent = response => {
     }
     const payload = Object.assign({}, ...saved.map(item => {
         return {
-            [item.id]: { ...item }
+            [item.id]: { ...item, time: new Date().getTime() }
         }
     }))
     return refreshSavedProperty(payload)
