@@ -24,6 +24,9 @@ const Property = ({ ...props }) => {
             <Container>
                 <Row>
                     <div className="col-lg-8">
+                        <h2 style={{ margin: 10 }} className='h2'>
+                            All properties
+                        </h2>
                         <List
                             items={results}
                             action={CONSTANTS.ADD}
@@ -32,6 +35,9 @@ const Property = ({ ...props }) => {
                         />
                     </div>
                     <div className="col-lg">
+                        <h2 style={{ margin: 10 }} className='h2'>
+                            Saved properties
+                        </h2>
                         <SavedProperty
                             action={CONSTANTS.REMOVE}
                             savedProperty={savedProperty}
