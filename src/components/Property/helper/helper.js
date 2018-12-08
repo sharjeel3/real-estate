@@ -8,8 +8,13 @@ const helper = (() => {
         }
     }
 
+    const getIsSaved = (id, savedProperty) => {
+        return Object.keys(savedProperty).indexOf(id) !== -1
+    }
+
     return {
-        getAgencyAssets
+        getAgencyAssets,
+        getIsSaved
     }
 })()
 

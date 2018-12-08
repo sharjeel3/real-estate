@@ -5,6 +5,7 @@ import propertyHelper from '../helper/helper'
 import styles from './Item.module.scss'
 import Button from '../../../style-guide/react/Button/Button'
 import classnames from 'classnames'
+import { CONSTANTS } from '../../../global'
 
 class Item extends Component {
     constructor(props) {
@@ -26,14 +27,19 @@ class Item extends Component {
     }
 
     render() {
-        const { item, onClick } = this.props
+        const { item, onClick, savedProperty, action } = this.props
         if (!item) {
             return ''
         }
 
-        const { price, mainImage, agency } = item
+        const { price, mainImage, agency, id } = item
         const { image, color } = propertyHelper.getAgencyAssets(agency)
         const { hover } = this.state
+        const isSaved = propertyHelper.getIsSaved(id, savedProperty)
+        const actionText = action === CONSTANTS.ADD ? 'Add' : 'Remove'
+        const buttonText = isSaved ? 'Saved...' : `${actionText} Property`
+        const buttonDisabled = isSaved ? true : false
+        const handleClick = typeof onClick === 'function' ? onClick(action, item) : null
 
         return (
             <Card
@@ -48,10 +54,10 @@ class Item extends Component {
                     <div className={styles.price}>{price}</div>
                 </div>
                 <div className={classnames(styles.overlay, {
-                    [styles.overlay_isVisible]: hover
+                    [styles.overlay_isVisible]: hover === true && action
                 })}>
-                    <Button>
-                        Add Property
+                    <Button disabled={buttonDisabled} onClick={handleClick}>
+                        {buttonText}
                     </Button>
                 </div>
             </Card>

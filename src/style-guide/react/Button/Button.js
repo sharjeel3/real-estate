@@ -7,7 +7,8 @@ const Button = ({ ...props }) => {
 
     return (
         <button {...restProps} className={classnames(styles.root, 'btn', {
-            [className]: className
+            [className]: className,
+            [styles.root_isDisabled]: restProps.disabled === true
         })}>
             {children}
         </button>

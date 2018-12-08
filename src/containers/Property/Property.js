@@ -10,7 +10,7 @@ class Property extends Component {
         onLoad()
     }
 
-    addSavedProperty(property) {
+    addSavedProperty = property => {
         const { onSave } = this.props
         onSave({
             [property.id]: {
@@ -20,7 +20,7 @@ class Property extends Component {
         })
     }
 
-    removeSavedProperty(property) {
+    removeSavedProperty = property => {
         const { onRemove } = this.props
         onRemove(property.id)
     }
@@ -41,7 +41,8 @@ class Property extends Component {
             error,
             response,
             savedProperty,
-            isFetching
+            isFetching,
+            onClick: this.handleClick
         }
 
         return (

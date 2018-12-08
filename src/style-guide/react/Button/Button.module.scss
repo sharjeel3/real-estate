@@ -5,3 +5,9 @@
   font-size: 16px;
   color: white;
 }
+
+.root_isDisabled {
+  &, &:disabled {
+    opacity: 0.9;
+  }
+}
