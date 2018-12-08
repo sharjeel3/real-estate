@@ -1,17 +1,34 @@
 import React from 'react'
 import styles from './Property.module.scss'
 import Loader from '../../style-guide/react/Loader/Loader'
+import Container from '../../style-guide/react/Container/Container'
+import Row from '../../style-guide/react/Row/Row'
+import List from './List/List'
 
 const Property = ({ ...props }) => {
-    const { isFetching } = props
+    const { isFetching, response } = props
 
     if (isFetching) {
         return <Loader />
     }
 
+    const { results } = response || {}
+    if (!results || results.length === 0) {
+        return ''
+    }
+
     return (
         <div className={styles.root}>
-            Views will be here
+            <Container>
+                <Row>
+                    <div className="col-lg-8">
+                        <List items={results} />
+                    </div>
+                    <div className="col-lg">
+                        Saved Properties
+                    </div>
+                </Row>
+            </Container>
         </div>
     )
 }
