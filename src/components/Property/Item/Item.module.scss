@@ -1,3 +1,7 @@
+.root {
+  position: relative;
+}
+
 .agencyImage {
   margin: 7px 8px;
   height: 30px;
@@ -11,4 +15,24 @@
   font-size: 18px;
   line-height: 24px;
   color: #333f48;
+}
+
+.overlay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0,0,0,0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.overlay_isVisible {
+  visibility: visible;
+  opacity: 1;
 }

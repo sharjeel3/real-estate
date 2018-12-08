@@ -2,7 +2,7 @@ import React from 'react'
 import Item from '../Item/Item'
 
 const List = ({ ...props }) => {
-    const { items } = props
+    const { items, ...restProps } = props
     if (!items || !items.length) {
         return ''
     }
@@ -11,7 +11,7 @@ const List = ({ ...props }) => {
         <div>
             {items.map((item) => {
                 return (
-                    <Item key={item.id} {...item} />
+                    <Item key={item.id} {...restProps} item={item} />
                 )
             })}
         </div>
